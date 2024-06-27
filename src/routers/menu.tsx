@@ -1,5 +1,6 @@
 import { SettingOutlined } from '@ant-design/icons';
 import DetailTeacher from '@pages/detailTeacher';
+import Home from '@pages/Home';
 import Teacher from '@pages/teacher';
 import { ReactNode } from 'react';
 
@@ -7,12 +8,17 @@ export interface menuProps {
   key: string;
   icon?: ReactNode;
   path: string;
-  label: string;
+  label?: string;
   children?: menuProps[];
   element: ReactNode;
 }
 
 const menu: menuProps[] = [
+  {
+    key: '',
+    path: '',
+    element: <Home />,
+  },
   {
     key: 'teacher',
     path: 'teacher',

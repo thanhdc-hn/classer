@@ -2,7 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 
 const globalStyled = createGlobalStyle`
   * {
-    color: #f37c7c;
+    font-family: "Playwrite DE Grund", cursive;
+  }
+  
+  body {
+    margin: 0;
   }
 `;
 

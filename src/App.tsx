@@ -5,10 +5,7 @@ const App = () => {
   return (
     <>
       <GlobalStyled />
-      This is app
-      <div>
-        <Outlet />
-      </div>
+      <Outlet />
     </>
   );
 };

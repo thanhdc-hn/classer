@@ -1,0 +1,1 @@
+export * from './styledContants.ts';

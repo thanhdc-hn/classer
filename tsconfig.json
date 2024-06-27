@@ -9,7 +9,8 @@
     "paths": {
       "@src/*": ["./src/*"],
       "@pages/*": ["./src/pages/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@lib/*": ["./src/lib/*"]
     },
 
     /* Bundler mode */
@@ -24,7 +25,9 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

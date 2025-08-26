@@ -1,4 +1,4 @@
-import { IdcardOutlined, SmileOutlined } from '@ant-design/icons';
+import { IdcardOutlined } from '@ant-design/icons';
 import { ReactNode } from 'react';
 
 export interface itemSideBarProps {
@@ -11,22 +11,9 @@ export interface itemSideBarProps {
 
 export const itemSideBar: itemSideBarProps[] = [
   {
-    key: 'identity',
+    key: 'tarot',
     icon: <IdcardOutlined />,
-    label: 'Identity',
-    path: 'identity',
-  },
-  {
-    key: 'relax',
-    icon: <SmileOutlined />,
-    label: 'Relax',
-    path: 'relax',
-    children: [
-      {
-        key: 'tarot',
-        label: 'Tarot',
-        path: 'tarot',
-      },
-    ],
+    label: 'Tarot',
+    path: 'tarot',
   },
 ];

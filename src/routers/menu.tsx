@@ -1,8 +1,8 @@
-import DetailTeacher from '@pages/detailTeacher';
-import Home from '@pages/Home';
-import Tarot from '@pages/Tarot';
-import Teacher from '@pages/teacher';
-import { ReactNode } from 'react';
+import { withSuspense } from '@src/HOC';
+import { lazy, ReactNode } from 'react';
+
+const Home = lazy(() => import('@pages/Home'));
+const Tarot = lazy(() => import('@pages/Tarot'));
 
 export interface menuProps {
   key: string;
@@ -15,34 +15,12 @@ const menu: menuProps[] = [
   {
     key: '',
     path: '',
-    element: <Home />,
-  },
-  {
-    key: 'teacher',
-    path: 'teacher',
-    element: <Teacher />,
-    children: [
-      {
-        key: 'detail-teacher',
-        path: 'detail',
-        element: <DetailTeacher />,
-      },
-    ],
-  },
-  {
-    key: 'student',
-    path: 'student',
-    element: <>Student router</>,
-  },
-  {
-    key: 'setting',
-    path: 'setting',
-    element: <>Setting router</>,
+    element: withSuspense(<Home />),
   },
   {
     key: 'tarot',
     path: 'tarot',
-    element: <Tarot />,
+    element: withSuspense(<Tarot />),
   },
 ];
 

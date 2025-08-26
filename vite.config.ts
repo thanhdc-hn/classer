@@ -11,5 +11,6 @@ export default defineConfig({
       '@assets': '/src/assets',
       '@lib': '/src/lib',
     },
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'], // 👈 important
   },
 });

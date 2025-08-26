@@ -1,5 +1,6 @@
 import TarotStyled from '@pages/Tarot/tarot.styled.ts';
 import { useState } from 'react';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
 import fullDeck from './deck.json';
 
 type TarotCard = {
@@ -28,7 +29,7 @@ const Tarot = () => {
     // Prepare a new deck with initial properties
     const deck: TarotCard[] = fullDeck.map((card) => ({
       name: card.name,
-      reverse: Math.random() < 0.5, // 50% chance of being reversed
+      reverse: Math.random() < 0.4, // 50% chance of being reversed
       show: false, // Always false initially
       image: card.image,
     }));
@@ -57,6 +58,22 @@ const Tarot = () => {
     const updatedCards = [...cards];
     updatedCards[index].show = true;
     setCards(updatedCards);
+  };
+
+  const getCardFlip = cards
+    .filter((item) => item.show)
+    .map((item) => (item.reverse ? `${item.name} ngược` : item.name))
+    .join(', ');
+
+  const copyCard = () => {
+    // handle copy to clipboard getCardFlip
+    navigator.clipboard.writeText(getCardFlip).then(() => {
+      toast.dismiss();
+      toast.success('Copied to clipboard', {
+        position: 'top-center',
+        transition: Bounce,
+      });
+    });
   };
 
   return (
@@ -122,12 +139,13 @@ const Tarot = () => {
         </div>
       )}
 
-      <div className={'cards-showed'}>
+      <div className={'cards-showed'} onClick={copyCard}>
         {cards
           .filter((item) => item.show)
           .map((item) => (item.reverse ? `${item.name} ngược` : item.name))
           .join(', ')}
       </div>
+      <ToastContainer limit={1} />
     </TarotStyled>
   );
 };

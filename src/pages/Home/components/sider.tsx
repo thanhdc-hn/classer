@@ -21,7 +21,11 @@ const Sidebar = () => {
   const renderMenuItem = (menu: itemSideBarProps[]) => {
     return menu.map((menuParent: itemSideBarProps, index: number) => (
       <div key={`menu-group-${index}`} className="menu-group">
-        <li className="menu-li-parent" style={{ cursor: 'pointer' }}>
+        <li
+          className="menu-li-parent"
+          style={{ cursor: 'pointer' }}
+          onClick={() => handleNavigation(menuParent.path)}
+        >
           {menuParent.icon}
           <span className="menu-label">{menuParent.label}</span>
         </li>

@@ -83,6 +83,12 @@ const TarotStyled = styled.div`
       &.reverse:not(.show) .card-back {
         transform: rotate(180deg);
       }
+
+      /* When reversed, flip only the illustration on the front so the name stays readable */
+
+      &.reverse .card-front .card-illustration {
+        transform: rotate(180deg);
+      }
     }
 
     .card-face {
@@ -102,8 +108,11 @@ const TarotStyled = styled.div`
       background: linear-gradient(to bottom, #f8f5ff, #eee6ff);
       transform: rotateY(180deg);
       text-align: center;
-      padding: 1rem 0.5rem;
+      padding: 0.6rem;
       border: 1px solid rgba(138, 110, 255, 0.3);
+      /* Use vertical layout: image on top, name at bottom */
+      justify-content: space-between;
+      gap: 0;
 
       /* Mystical border pattern */
 
@@ -146,12 +155,29 @@ const TarotStyled = styled.div`
         background-repeat: no-repeat;
       }
 
-      .card-name {
-        font-size: 0.9rem;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
+      /* Image fills the available space above the name and stays above the decorative border */
+
+      .card-illustration {
+        width: 100%;
+        flex: 1 1 auto;
+        object-fit: contain;
+        border-radius: 6px;
         position: relative;
         z-index: 1;
+        transition: transform 0.3s ease;
+        /* Prevent the image from being stretched taller than the card; height controlled by flex */
+        max-height: 90%;
+      }
+
+      .card-name {
+        font-size: 0.8rem;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
+
+        @media (max-width: 480px) {
+          font-size: 0.6rem;
+        }
       }
 
       .card-status {
@@ -361,14 +387,14 @@ const TarotStyled = styled.div`
   @media (max-width: 768px) {
     .cards-container {
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 1rem;
+      gap: 2rem;
     }
   }
 
   @media (max-width: 480px) {
     .cards-container {
       grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-      gap: 0.75rem;
+      gap: 2rem;
     }
   }
 `;

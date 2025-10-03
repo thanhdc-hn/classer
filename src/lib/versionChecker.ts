@@ -10,17 +10,19 @@ async function checkVersion() {
 
     const currentVersion = localStorage.getItem('app-version');
 
-    if (currentVersion && +currentVersion !== +version) {
-      // Show toast with reload button
-      toast.info('⚡ New version available – Click to refresh', {
-        autoClose: false,
-        closeOnClick: false,
-        draggable: false,
-        onClick: () => {
-          localStorage.setItem('app-version', version);
-          window.location.reload();
-        },
-      });
+    if (currentVersion) {
+      if (+currentVersion !== +version) {
+        // Show toast with reload button
+        toast.info('⚡ New version available – Click to refresh', {
+          autoClose: false,
+          closeOnClick: false,
+          draggable: false,
+          onClick: () => {
+            localStorage.setItem('app-version', version);
+            window.location.reload();
+          },
+        });
+      }
     } else {
       localStorage.setItem('app-version', version);
     }
@@ -30,6 +32,9 @@ async function checkVersion() {
 }
 
 export function initVersionChecker() {
+  // Only run in production
+  if (!import.meta.env.PROD) return;
+
   // Run once on app load
   checkVersion();
 

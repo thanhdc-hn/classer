@@ -31,7 +31,9 @@ const Tarot = () => {
       name: card.name,
       reverse: Math.random() < 0.4, // 50% chance of being reversed
       show: false, // Always false initially
-      image: card.image,
+      image: card.image
+        ? new URL(`./${card.image}`, import.meta.url).toString()
+        : undefined,
     }));
 
     // Shuffle the deck using Fisher-Yates algorithm
@@ -104,10 +106,13 @@ const Tarot = () => {
               >
                 <div className="card-face card-back"></div>
                 <div className="card-face card-front">
+                  <img
+                    className="card-illustration"
+                    src={card.image}
+                    alt={card.name}
+                    loading="lazy"
+                  />
                   <div className="card-name">{card.name}</div>
-                  {card.reverse && (
-                    <div className="card-status">(Reversed)</div>
-                  )}
                 </div>
               </div>
             </div>

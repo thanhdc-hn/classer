@@ -1,13 +1,50 @@
 import styled from 'styled-components';
 
 const TarotStyled = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 2rem;
   background-color: #3f1d8c;
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
+  overflow: hidden;
+
+  .layout {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 1.2rem;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .main-panel {
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+  }
+
+  .side-panel {
+    min-height: 0;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(20, 10, 46, 0.45);
+    backdrop-filter: blur(2px);
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .side-panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.65rem;
+  }
 
   .controls {
     margin-bottom: 2rem;
@@ -41,7 +78,6 @@ const TarotStyled = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 1.5rem;
     width: 100%;
-    max-width: 1200px;
 
     &.is-shuffling {
       filter: blur(1px);
@@ -258,11 +294,74 @@ const TarotStyled = styled.div`
   }
 
   .cards-showed {
-    margin-top: 48px;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.55;
+    font-weight: 600;
+    text-align: left;
     color: #fff;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+
+  .mobile-draw-toggle {
+    display: none;
+  }
+
+  .mobile-draw-sheet-backdrop {
+    display: none;
+  }
+
+  .draw-mode-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(20, 12, 52, 0.55);
+    backdrop-filter: blur(3px);
+  }
+
+  .draw-mode-popup {
+    width: min(92vw, 420px);
+    border-radius: 12px;
+    background: linear-gradient(145deg, #f8f5ff, #ece3ff);
+    border: 1px solid rgba(101, 78, 163, 0.25);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    padding: 1.2rem;
+    text-align: center;
+
+    h3 {
+      margin: 0 0 1rem;
+      color: #35205f;
+      font-size: 1.1rem;
+    }
+  }
+
+  .draw-mode-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      background: linear-gradient(135deg, #6f52cc, #8a6eff);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+      box-shadow: 0 8px 20px rgba(111, 82, 204, 0.35);
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
   }
 
   /* Shuffle overlay */
@@ -385,6 +484,98 @@ const TarotStyled = styled.div`
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
+    height: auto;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 1rem 1rem 5.5rem;
+
+    .layout {
+      grid-template-columns: 1fr;
+      height: 100%;
+    }
+
+    .main-panel {
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 0;
+      padding-bottom: 1rem;
+    }
+
+    .side-panel {
+      display: none;
+    }
+
+    .mobile-draw-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 1300;
+      border: none;
+      border-radius: 999px;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(135deg, #6f52cc, #8a6eff);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(20, 12, 52, 0.5);
+    }
+
+    .mobile-draw-sheet-backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 1400;
+      background: rgba(18, 11, 45, 0.5);
+      backdrop-filter: blur(2px);
+    }
+
+    .mobile-draw-sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      background: linear-gradient(180deg, #f8f5ff, #ede6ff);
+      box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.35);
+      padding: 1rem 1rem 1.2rem;
+      max-height: 62vh;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .mobile-draw-sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h4 {
+        margin: 0;
+        color: #2f1d56;
+        font-size: 1rem;
+      }
+
+      button {
+        border: none;
+        border-radius: 8px;
+        padding: 0.4rem 0.6rem;
+        background: #6f52cc;
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+
+    .mobile-draw-sheet-content {
+      overflow-y: auto;
+      color: #2f1d56;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+
     .cards-container {
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
       gap: 2rem;

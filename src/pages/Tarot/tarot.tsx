@@ -1,3 +1,4 @@
+import { CopyOutlined } from '@ant-design/icons';
 import TarotStyled from '@pages/Tarot/tarot.styled.ts';
 import TarotCardModal, { TarotCard } from '@src/components/TarotCardModal.tsx';
 import { useState } from 'react';
@@ -75,10 +76,20 @@ const Tarot = () => {
     if (!cards[index].show) {
       if (currentShownCount >= maxDrawCount) {
         toast.dismiss();
-        toast.info(`You have drawn enough ${maxDrawCount} cards.`, {
-          position: 'top-center',
-          transition: Bounce,
-        });
+        toast.info(
+          <div className="toast-draw-limit">
+            <p>You have drawn enough {maxDrawCount} cards.</p>
+            <div className="toast-actions">
+              <button onClick={() => reshuffle()}>Draw Again</button>
+            </div>
+          </div>,
+          {
+            position: 'top-center',
+            transition: Bounce,
+            autoClose: false,
+            closeOnClick: false,
+          },
+        );
         return;
       }
       const updatedCards = [...cards];
@@ -108,6 +119,31 @@ const Tarot = () => {
 
   const closeModalDetail = () => {
     setCardDetail(null);
+  };
+
+  const reshuffle = () => {
+    toast.dismiss();
+    setCardDetail(null);
+
+    // Shuffle current deck again without the 3.5s animation
+    const deck = [...cards].map((card) => ({
+      ...card,
+      show: false,
+      reverse: Math.random() < 0.4,
+    }));
+
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+
+    setCards(deck);
+
+    // Small entry animation
+    const totalEntryMs =
+      ENTRY_STAGGER_MS * MAX_STAGGER_INDEX + ENTRY_DURATION_MS + 120;
+    setJustShuffled(true);
+    window.setTimeout(() => setJustShuffled(false), totalEntryMs);
   };
 
   return (
@@ -159,8 +195,19 @@ const Tarot = () => {
           </div>
 
           <aside className="side-panel">
-            <div className="side-panel-title">Drawn Cards</div>
-            <div className={'cards-showed'} onDoubleClick={copyCard}>
+            <div className="side-panel-header">
+              <div className="side-panel-title">Drawn Cards</div>
+              {getCardFlip && (
+                <button
+                  className="copy-btn"
+                  onClick={copyCard}
+                  title="Copy cards"
+                >
+                  <CopyOutlined />
+                </button>
+              )}
+            </div>
+            <div className={'cards-showed'}>
               {getCardFlip || 'No cards drawn yet'}
             </div>
           </aside>
@@ -220,12 +267,23 @@ const Tarot = () => {
             >
               <div className="mobile-draw-sheet-header">
                 <h4>Drawn Cards</h4>
-                <button
-                  onClick={() => setIsMobileDrawSheetOpen(false)}
-                  aria-label="Close"
-                >
-                  Close
-                </button>
+                <div className="mobile-draw-sheet-actions">
+                  {getCardFlip && (
+                    <button
+                      className="copy-btn"
+                      onClick={copyCard}
+                      aria-label="Copy cards"
+                    >
+                      <CopyOutlined />
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setIsMobileDrawSheetOpen(false)}
+                    aria-label="Close"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
               <div className="mobile-draw-sheet-content">
                 {getCardFlip || 'No cards drawn yet'}

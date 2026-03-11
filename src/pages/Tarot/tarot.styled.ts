@@ -39,11 +39,36 @@ const TarotStyled = styled.div`
     overflow-y: auto;
   }
 
+  .side-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.65rem;
+  }
+
   .side-panel-title {
     font-size: 1rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0;
+  }
+
+  .copy-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
   }
 
   .controls {
@@ -129,6 +154,8 @@ const TarotStyled = styled.div`
 
     .card-face {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       backface-visibility: hidden;
@@ -482,21 +509,61 @@ const TarotStyled = styled.div`
     }
   }
 
+  .toast-draw-limit {
+    text-align: center;
+
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .toast-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+
+      button {
+        padding: 0.6rem 1.5rem;
+        border: none;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #8a6eff, #7254e5);
+        color: white;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 10px rgba(138, 110, 255, 0.3);
+
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 15px rgba(138, 110, 255, 0.4);
+          filter: brightness(1.1);
+        }
+
+        &:active {
+          transform: translateY(1px);
+          box-shadow: 0 2px 5px rgba(138, 110, 255, 0.3);
+        }
+      }
+    }
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     height: auto;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: visible;
     padding: 1rem 1rem 5.5rem;
 
     .layout {
       grid-template-columns: 1fr;
-      height: 100%;
+      height: auto;
     }
 
     .main-panel {
       min-height: 0;
-      overflow-y: auto;
+      overflow-y: visible;
       padding-right: 0;
       padding-bottom: 1rem;
     }
@@ -558,6 +625,12 @@ const TarotStyled = styled.div`
         font-size: 1rem;
       }
 
+      .mobile-draw-sheet-actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
       button {
         border: none;
         border-radius: 8px;
@@ -565,6 +638,20 @@ const TarotStyled = styled.div`
         background: #6f52cc;
         color: #fff;
         font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .copy-btn {
+        background: #ede6ff;
+        color: #6f52cc;
+        border: 1px solid #dcd1ff;
+        font-size: 1rem;
+
+        &:active {
+          background: #dcd1ff;
+        }
       }
     }
 

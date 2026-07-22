@@ -1,4 +1,4 @@
-import { IdcardOutlined } from '@ant-design/icons';
+import { DollarOutlined, IdcardOutlined } from '@ant-design/icons';
 import { ReactNode } from 'react';
 
 export interface itemSideBarProps {
@@ -15,5 +15,11 @@ export const itemSideBar: itemSideBarProps[] = [
     icon: <IdcardOutlined />,
     label: 'Tarot',
     path: 'tarot',
+  },
+  {
+    key: 'poker',
+    icon: <DollarOutlined />,
+    label: 'Poker',
+    path: 'poker',
   },
 ];

@@ -3,6 +3,8 @@ import { lazy, ReactNode } from 'react';
 
 const Home = lazy(() => import('@pages/Home'));
 const Tarot = lazy(() => import('@pages/Tarot'));
+const Travel = lazy(() => import('@pages/Travel'));
+const Poker = lazy(() => import('@pages/Poker'));
 
 export interface menuProps {
   key: string;
@@ -21,6 +23,16 @@ const menu: menuProps[] = [
     key: 'tarot',
     path: 'tarot',
     element: withSuspense(<Tarot />),
+  },
+  {
+    key: 'quang-binh',
+    path: 'quang-binh',
+    element: withSuspense(<Travel />),
+  },
+  {
+    key: 'poker',
+    path: 'poker',
+    element: withSuspense(<Poker />),
   },
 ];
 

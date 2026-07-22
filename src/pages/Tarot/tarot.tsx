@@ -45,9 +45,7 @@ const Tarot = () => {
       ...card,
       reverse: Math.random() < 0.4, // 50% chance of being reversed
       show: false, // Always false initially
-      image: card.image
-        ? new URL(`./${card.image}`, import.meta.url).toString()
-        : undefined,
+      image: card.image ? `/${card.image}` : undefined,
     }));
 
     // Shuffle the deck using Fisher-Yates algorithm

@@ -1,4 +1,9 @@
-import { CrownFilled, CrownOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  CrownFilled,
+  CrownOutlined,
+  DeleteOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
 import { Button, InputNumber, Popconfirm, Tooltip } from 'antd';
 import dayjs from 'dayjs';
 import { Player } from '../types.ts';
@@ -90,6 +95,7 @@ const PlayerCard = ({
           <InputNumber
             size="small"
             min={0}
+            inputMode="numeric"
             placeholder="—"
             value={player.cashOut}
             style={{ width: 90 }}

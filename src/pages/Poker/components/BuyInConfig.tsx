@@ -13,6 +13,7 @@ const BuyInConfig = ({ value, onChange }: Props) => {
         <span className="config-label">Số chip mỗi buy-in</span>
         <InputNumber
           min={0}
+          inputMode="numeric"
           value={value}
           style={{ width: 120 }}
           addonAfter="chip"

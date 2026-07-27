@@ -1,4 +1,8 @@
-import { ArrowRightOutlined, DollarOutlined, StarOutlined } from '@ant-design/icons';
+import {
+  ArrowRightOutlined,
+  DollarOutlined,
+  StarOutlined,
+} from '@ant-design/icons';
 import { CSSProperties, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeStyled from './home.styled.ts';
@@ -24,7 +28,8 @@ const features: Feature[] = [
   {
     key: 'poker',
     title: 'Poker Cash Flow',
-    description: 'Quản lí buy-in, cash-out và chia tiền buổi poker cùng bạn bè.',
+    description:
+      'Quản lí buy-in, cash-out và chia tiền buổi poker cùng bạn bè.',
     icon: <DollarOutlined />,
     path: '/poker',
     accent: '#38bdf8',

@@ -2,9 +2,16 @@ import styled from 'styled-components';
 
 const HomeStyled = styled.div`
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.18), transparent 40%),
-    radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.18), transparent 40%),
+  background: radial-gradient(
+      circle at 15% 15%,
+      rgba(168, 85, 247, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(56, 189, 248, 0.18),
+      transparent 40%
+    ),
     linear-gradient(135deg, #0f172a 0%, #111827 100%);
   color: #e2e8f0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

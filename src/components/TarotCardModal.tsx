@@ -7,7 +7,9 @@ const { Paragraph } = Typography;
 export interface TarotCard {
   name?: string;
   description?: string;
+  descriptionVi?: string;
   interpretation?: string;
+  interpretationVi?: string;
   image?: string;
   suite?: string;
   reverse?: boolean;
@@ -76,12 +78,14 @@ const TarotCardModal: React.FC<TarotCardModalProps> = ({
   onClose,
 }) => {
   const title = card?.name ?? 'Card details';
-  const descriptionText = card?.description
-    ? normalizeLineBreaks(card.description)
+  const descriptionSource = card?.descriptionVi ?? card?.description;
+  const descriptionText = descriptionSource
+    ? normalizeLineBreaks(descriptionSource)
     : '—';
 
-  const { upright, reversed } = card?.interpretation
-    ? splitInterpretation(card.interpretation)
+  const interpretationSource = card?.interpretationVi ?? card?.interpretation;
+  const { upright, reversed } = interpretationSource
+    ? splitInterpretation(interpretationSource)
     : { upright: '', reversed: '' };
 
   const hasUpright = Boolean(upright && upright.trim().length > 0);

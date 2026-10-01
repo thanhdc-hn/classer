@@ -141,9 +141,7 @@ const TarotStyled = styled.div`
         transform: rotateY(180deg);
       }
 
-      &.reverse:not(.show) .card-back {
-        transform: rotate(180deg);
-      }
+      /* Back face is intentionally NOT rotated for reversed cards, so every card back looks identical */
 
       /* When reversed, flip only the illustration on the front so the name stays readable */
 

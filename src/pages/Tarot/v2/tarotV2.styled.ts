@@ -232,6 +232,11 @@ const TarotV2Styled = styled.div`
     touch-action: none;
     user-select: none;
     cursor: grab;
+    margin: -2rem;
+
+    @media (max-width: 768px) {
+      margin: -1rem;
+    }
 
     &.is-dragging {
       cursor: grabbing;
@@ -416,9 +421,7 @@ const TarotV2Styled = styled.div`
       transform: rotateY(180deg);
     }
 
-    &.reverse:not(.show) .card-back {
-      transform: rotate(180deg);
-    }
+    /* Back face is NOT rotated for reversed cards, so every card back looks identical */
 
     /* Only the illustration flips so the name stays readable */
     &.reverse .card-front .card-illustration {

@@ -105,8 +105,9 @@ const TarotCardModal: React.FC<TarotCardModalProps> = ({
   return (
     <Modal
       open={open}
-      onCancel={onClose}
       onOk={onClose}
+      okText="Đóng"
+      cancelButtonProps={{ style: { display: 'none' } }}
       title={title}
       width={720}
       destroyOnHidden
@@ -114,13 +115,13 @@ const TarotCardModal: React.FC<TarotCardModalProps> = ({
     >
       <Content>
         <Section>
-          <Label>Description</Label>
+          <Label>Mô tả</Label>
           <Preformatted>{descriptionText}</Preformatted>
         </Section>
 
         {hasUpright && (
           <Section>
-            <Label>Interpretation</Label>
+            <Label>Ý nghĩa</Label>
             <EmphasisBlock $active={uprightActive}>
               <Preformatted $dimmed={uprightDimmed}>
                 {interpretationUprightText}
@@ -131,7 +132,7 @@ const TarotCardModal: React.FC<TarotCardModalProps> = ({
 
         {hasReversed && (
           <Section>
-            <Label>Reversed</Label>
+            <Label>Lật ngược</Label>
             <EmphasisBlock $active={reversedActive}>
               <Preformatted $dimmed={reversedDimmed}>
                 {interpretationReversedText}

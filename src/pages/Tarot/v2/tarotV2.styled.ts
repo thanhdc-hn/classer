@@ -1,3 +1,5 @@
+import tarotBg from '@assets/images/tarot_bg.webp';
+import tarotCardBg from '@assets/images/tarot_card_bg.webp';
 import styled from 'styled-components';
 import { CARD_K, RADIUS_K, WHEEL_SHOW_K } from './constants.ts';
 
@@ -7,6 +9,10 @@ const TarotV2Styled = styled.div`
   flex-direction: column;
   padding: 2rem;
   background-color: #3f1d8c;
+  background-image: url(${tarotBg});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 100vh;
   position: relative;
   overflow: hidden;
@@ -468,7 +474,9 @@ const TarotV2Styled = styled.div`
   }
 
   .card-back {
-    background: linear-gradient(135deg, #654ea3, #da98ff) center;
+    background:
+      url(${tarotCardBg}) center / cover no-repeat,
+      linear-gradient(135deg, #654ea3, #da98ff) center;
     border: 1px solid rgba(255, 255, 255, 0.35);
 
     /* Mystical pattern overlay */

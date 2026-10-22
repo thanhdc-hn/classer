@@ -5,6 +5,7 @@ const Home = lazy(() => import('@pages/Home'));
 const Tarot = lazy(() => import('@pages/Tarot'));
 const Travel = lazy(() => import('@pages/Travel'));
 const Poker = lazy(() => import('@pages/Poker'));
+const Vietlott = lazy(() => import('@pages/Vietlott'));
 
 export interface menuProps {
   key: string;
@@ -33,6 +34,11 @@ const menu: menuProps[] = [
     key: 'poker',
     path: 'poker',
     element: withSuspense(<Poker />),
+  },
+  {
+    key: 'vietlott',
+    path: 'vietlott',
+    element: withSuspense(<Vietlott />),
   },
 ];
 

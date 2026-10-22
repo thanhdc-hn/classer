@@ -2,6 +2,7 @@ import {
   ArrowRightOutlined,
   DollarOutlined,
   StarOutlined,
+  TrophyOutlined,
 } from '@ant-design/icons';
 import { CSSProperties, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +34,15 @@ const features: Feature[] = [
     icon: <DollarOutlined />,
     path: '/poker',
     accent: '#38bdf8',
+  },
+  {
+    key: 'vietlott',
+    title: 'Quay số Vietlott',
+    description:
+      'Quay ngẫu nhiên dãy số 6/45 hoặc 6/55 và tự động lưu lại các dãy đã quay.',
+    icon: <TrophyOutlined />,
+    path: '/vietlott',
+    accent: '#f59e0b',
   },
 ];
 
